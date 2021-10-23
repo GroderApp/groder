@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "939323869918",
+    "project_id": "groder-bc92e",
+    "storage_bucket": "groder-bc92e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939323869918:android:2d4258f97c9dac0387904f",
+        "android_client_info": {
+          "package_name": "com.groder.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939323869918-k2lttrngao6vll9se7b8ovboka9s3elt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByCclFe7KPkBtCCadPdrQKakfRRSeZV7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939323869918-k2lttrngao6vll9se7b8ovboka9s3elt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

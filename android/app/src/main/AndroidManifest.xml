@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.groder.groder">
+    package="com.groder.app">
    <application
         android:label="groder"
         android:icon="@mipmap/ic_launcher">
