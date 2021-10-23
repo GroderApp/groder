@@ -1,4 +1,4 @@
-package com.example.groder.groder
+package com.groder.app
 
 import io.flutter.embedding.android.FlutterActivity
 
