@@ -1,8 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:groder/profile.dart';
 import 'package:groder/shared/groder_colors.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:groder/authScreens/authenticate.dart';
+import 'package:groder/home.dart';
+import 'package:groder/services/authentication_service.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -11,33 +20,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Groder',
-      theme: ThemeData(
-        fontFamily: 'Poppins',
-        primarySwatch: GroderColors.greenMaterial,
-      ),
-      home: const MyHomePage(title: 'Groder'),
+    return MultiProvider(
+          providers: [
+            Provider<AuthenticationService>(
+                create: (_) => AuthenticationService(FirebaseAuth.instance),
+            ),
+
+            StreamProvider(
+              create: (context) => context.read<AuthenticationService>().authStateChanges,
+              initialData: null,
+            )
+          ],
+          child: MaterialApp(
+            title: 'Groder',
+            theme: ThemeData(
+              fontFamily: 'Poppins',
+              primarySwatch: GroderColors.greenMaterial,
+            ),
+          home: AuthenticationWrapper(),
+        ),
     );
   }
 }
+class AuthenticationWrapper extends StatelessWidget {
+  const AuthenticationWrapper({Key? key}) : super(key: key);
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Profile(),
-      ),
-    );
+    final firebaseUser = context.watch<User?>();
+    if(firebaseUser == null) {
+      print("Signed out");
+      return Authenticate();
+    } else {
+      print("Signed In");
+      return Profile();
+    }
   }
 }
+
