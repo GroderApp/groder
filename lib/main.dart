@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:groder/profile.dart';
+import 'package:groder/shared/groder_colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:groder/authScreens/authenticate.dart';
 import 'package:groder/home.dart';
@@ -16,7 +18,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -33,14 +34,14 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             title: 'Groder',
             theme: ThemeData(
-            primarySwatch: Colors.green,
+              fontFamily: 'Poppins',
+              primarySwatch: GroderColors.greenMaterial,
             ),
           home: AuthenticationWrapper(),
         ),
     );
   }
 }
-
 class AuthenticationWrapper extends StatelessWidget {
   const AuthenticationWrapper({Key? key}) : super(key: key);
 
@@ -52,7 +53,7 @@ class AuthenticationWrapper extends StatelessWidget {
       return Authenticate();
     } else {
       print("Signed In");
-      return HomePage();
+      return Profile();
     }
   }
 }
