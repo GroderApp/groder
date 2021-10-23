@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:groder/past_order.dart';
 import 'package:groder/shared/groder_colors.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+class Profile extends StatefulWidget {
+  Profile({Key? key}) : super(key: key);
 
   @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
+    return DefaultTabController(
+      length: 3,
+      child: SafeArea(
         child: Center(
           child: Column(
             children: [
@@ -65,14 +71,14 @@ class Profile extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 100,
+                        width: 125,
                         height: 25,
                         child: Center(
                           child: Text(
                             "97 A+",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: GroderColors.black,
+                              color: GroderColors.white,
                               fontSize: 12,
                             ),
                           ),
@@ -86,7 +92,7 @@ class Profile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Column(
                     children: [
                       Text(
@@ -98,14 +104,14 @@ class Profile extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 100,
+                        width: 125,
                         height: 25,
                         child: Center(
                           child: Text(
                             "105",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: GroderColors.black,
+                              color: GroderColors.white,
                               fontSize: 12,
                             ),
                           ),
@@ -124,7 +130,62 @@ class Profile extends StatelessWidget {
                   ),
                 ],
               ),
-              const PastOrder(),
+              const SizedBox(
+                height: 15,
+              ),
+              SizedBox(
+                  height: 50,
+                  child: AppBar(
+                    elevation: 0,
+                    backgroundColor: Colors.white12,
+                    bottom: TabBar(labelColor: GroderColors.black, tabs: [
+                      Tab(child: Text("Publix")),
+                      Tab(child: Text("Costco")),
+                      Tab(child: Text("Wawa")),
+                    ]),
+                  )),
+              Expanded(
+                  child: TabBarView(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: const [
+                        SizedBox(height: 10),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: const [
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: const [
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
             ],
           ),
         ),

@@ -4,7 +4,7 @@ import 'package:groder/shared/groder_colors.dart';
 class PastOrder extends StatelessWidget {
   const PastOrder({Key? key}) : super(key: key);
 
-  Widget groceryCategory(String name) {
+  Widget groceryCategoryTag(String name) {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 0.0, 5.0, 0.0),
       child: InkWell(
@@ -29,7 +29,7 @@ class PastOrder extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 25,
-        vertical: 25,
+        vertical: 15,
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -84,41 +84,49 @@ class PastOrder extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "950 W Preachtree St NW",
-                  style: TextStyle(
-                    shadows: const [
-                      Shadow(color: Colors.black, offset: Offset(0, -3))
-                    ],
-                    color: Colors.transparent,
-                    decoration: TextDecoration.underline,
-                    decorationColor: GroderColors.green,
-                    decorationThickness: 2,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.map),
-                  iconSize: 20,
-                  padding: const EdgeInsets.fromLTRB(0, 0, 15, 2),
-                )
-              ],
+            const SizedBox(
+              height: 10,
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    groceryCategory("Home"),
-                    groceryCategory("Kitchen"),
-                    groceryCategory("Meals"),
+                    Text(
+                      "950 W Preachtree St NW",
+                      style: TextStyle(
+                        shadows: const [
+                          Shadow(color: Colors.black, offset: Offset(0, -3))
+                        ],
+                        color: Colors.transparent,
+                        decoration: TextDecoration.underline,
+                        decorationColor: GroderColors.green,
+                        decorationThickness: 2,
+                      ),
+                    ),
+                    IconButton(
+                      constraints: const BoxConstraints(),
+                      onPressed: () {},
+                      icon: const Icon(Icons.map),
+                      iconSize: 20,
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 7),
+                    ),
                   ],
                 ),
-              ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        groceryCategoryTag("Home"),
+                        groceryCategoryTag("Kitchen"),
+                        groceryCategoryTag("Meals"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
             Row(
               children: [
