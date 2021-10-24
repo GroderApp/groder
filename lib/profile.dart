@@ -54,6 +54,18 @@ class _ProfileState extends State<Profile> {
                             color: GroderColors.grey,
                           ),
                         ),
+                      ),
+                      Container(
+                        width: 125,
+                        height: 25,
+                        child: Center(
+                          child: Text(
+                            "97 A+",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: GroderColors.white,
+                              fontSize: 12,
+                            ),
                         Text(
                           " | ",
                           style: TextStyle(
@@ -67,6 +79,30 @@ class _ProfileState extends State<Profile> {
                             color: GroderColors.grey,
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Column(
+                    children: [
+                      Text(
+                        "deliveries",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          color: GroderColors.black,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Container(
+                        width: 125,
+                        height: 25,
+                        child: Center(
+                          child: Text(
+                            "105",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: GroderColors.white,
+                              fontSize: 12,
                       ],
                     ),
                     Row(
@@ -205,6 +241,62 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 15,
+              ),
+              SizedBox(
+                  height: 50,
+                  child: AppBar(
+                    elevation: 0,
+                    backgroundColor: Colors.white12,
+                    bottom: TabBar(labelColor: GroderColors.black, tabs: const [
+                      Tab(child: Text("Publix")),
+                      Tab(child: Text("Costco")),
+                      Tab(child: Text("Wawa")),
+                    ]),
+                  )),
+              Expanded(
+                  child: TabBarView(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: const [
+                        SizedBox(height: 10),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: const [
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: const [
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                        PastOrder(),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
             ],
           ),
         ),

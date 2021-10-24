@@ -8,7 +8,7 @@ import 'package:groder/authScreens/authenticate.dart';
 import 'package:groder/home.dart';
 import 'package:groder/services/authentication_service.dart';
 import 'package:provider/provider.dart';
-
+import 'search.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
