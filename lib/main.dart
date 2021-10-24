@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           ],
           child: MaterialApp(
             title: 'Groder',
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: 'Poppins',
               primarySwatch: GroderColors.greenMaterial,

@@ -12,9 +12,48 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
+        endDrawer: Container(
+          width: 200,
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60)),
+            child: Drawer(
+              elevation: 0,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 50),
+                  ListTile(
+                  title: new Text("Privacy", style: TextStyle(fontSize: 17),),
+                  leading: new Icon(Icons.privacy_tip_outlined, color: GroderColors.green, size: 28,),
+                  ),
+                  ListTile(
+                  title: new Text("Edit Profile", style: TextStyle(fontSize: 18),),
+                  leading: new Icon(Icons.person_outlined, color: GroderColors.green, size: 28,),
+                  ),
+                  ListTile(
+                  title: new Text("View TOS", style: TextStyle(fontSize: 17),),
+                  leading: new Icon(Icons.help_outline, color: GroderColors.green, size: 28,),
+                  ),
+                  GestureDetector(
+                    child: ListTile(
+                    title: new Text("Log out", style: TextStyle(fontSize: 17),),
+                    leading: new Icon(Icons.logout_outlined, color: GroderColors.green, size: 28,),
+                    ),
+                    onTap: () {
+                      context.read<AuthenticationService>().signOut();
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       body: DefaultTabController(
         length: 3,
         child: SafeArea(
@@ -27,6 +66,29 @@ class _ProfileState extends State<Profile> {
                   onPressed: () {
                     context.read<AuthenticationService>().signOut();
                   },
+                ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  height: 40,
+                  width: 120,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.chat_bubble_outline, size: 30,),
+                        onPressed: () {
+                        },
+                      ),
+                      SizedBox(width: 10),
+                      IconButton(
+                        icon: Icon(Icons.settings_outlined, size: 30,),
+                        onPressed: () {
+                          _key.currentState!.openEndDrawer();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Center(

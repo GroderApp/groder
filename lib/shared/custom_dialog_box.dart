@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 
 class CustomDialogBox extends StatefulWidget {
   final String title, descriptions, text;
-  final Image img;
 
-  const CustomDialogBox(Key key, this.title, this.descriptions, this.text, this.img) : super(key: key);
+  const CustomDialogBox({Key? key, required this.title, required this.descriptions, required this.text}) : super(key: key);
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();

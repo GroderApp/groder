@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:groder/authScreens/sign_up.dart';
 import 'package:groder/services/authentication_service.dart';
+import 'package:groder/shared/custom_dialog_box.dart';
 import 'package:groder/shared/groder_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class _SignInState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
   String password = '';
   String email = '';
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,7 +43,17 @@ class _SignInState extends State<SignIn> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 140),
+                SizedBox(height: 50),
+                loading ? SizedBox(
+                  height: 50.0,
+                  width: 50.0,
+                  child: new CircularProgressIndicator(
+                    color: GroderColors.green,
+                    value: null,
+                    strokeWidth: 7.0,
+                  ),
+                ) : SizedBox(height : 50),
+                SizedBox(height: 50),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -59,7 +71,8 @@ class _SignInState extends State<SignIn> {
                       if (val == null) return null;
                       return null;
                     },
-                    cursorColor: Colors.white,
+
+                    cursorColor: GroderColors.darkGrey,
                     decoration: InputDecoration(
                       icon: Icon(Icons.person, color: GroderColors.green),
                       hintText: "email",
@@ -80,7 +93,7 @@ class _SignInState extends State<SignIn> {
                     onChanged: (value) {
                       password = value;
                     },
-                    cursorColor: Colors.white,
+                    cursorColor: GroderColors.darkGrey,
                     decoration: InputDecoration(
                       hintText: "password",
                       icon: Icon(
@@ -112,11 +125,25 @@ class _SignInState extends State<SignIn> {
                       EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       color: GroderColors.green,
                       onPressed: () async {
+                        setState(() {
+                          loading = true;
+                        });
                         String toReturn = await context.read<AuthenticationService>().signIn(email, password);
+                        setState(() {
+                          loading = false;
+                        });
                         if(toReturn == "worked") {
                           Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
                         } else {
-
+                          showDialog(context: context,
+                              builder: (BuildContext context){
+                                return CustomDialogBox(
+                                  title: "Error signing in",
+                                  descriptions: toReturn,
+                                  text: "Ok",
+                                );
+                              }
+                          );
                         }
                       },
                       child: Text(
@@ -136,14 +163,14 @@ class _SignInState extends State<SignIn> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return SignUp();
-                            },
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) {
+                        //       return SignUp();
+                        //     },
+                        //   ),
+                        // );
                       },
                       child: Text(
                         "Sign Up",
