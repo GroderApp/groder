@@ -10,6 +10,7 @@ import 'package:groder/profile.dart';
 import 'package:groder/services/authentication_service.dart';
 import 'package:provider/provider.dart';
 
+import 'order_fulfillment.dart';
 import 'shared/groder_colors.dart';
 
 class Search extends StatefulWidget {
@@ -67,28 +68,48 @@ class _SearchState extends State<Search> {
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              children: [
-                SizedBox(width: 3,),
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()),);
-                    },
-                    icon: Icon(Icons.person_outlined, size: 30,),),
-                Spacer(),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()),);
-                  },
-                  icon: Icon(Icons.chat_bubble_outline, size: 30,),),
-                SizedBox(width: 10,),
-                IconButton(
-                  onPressed: () {
-                    _key.currentState!.openEndDrawer();
-                  },
-                  icon: Icon(Icons.settings_outlined, size: 30,),),
-                ]
-            ),
+            Row(children: [
+              SizedBox(
+                width: 3,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Profile()),
+                  );
+                },
+                icon: Icon(
+                  Icons.person_outlined,
+                  size: 30,
+                ),
+              ),
+              Spacer(),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+                icon: Icon(
+                  Icons.chat_bubble_outline,
+                  size: 30,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              IconButton(
+                onPressed: () {
+                  _key.currentState!.openEndDrawer();
+                },
+                icon: Icon(
+                  Icons.settings_outlined,
+                  size: 30,
+                ),
+              ),
+            ]),
             Center(
               child: Text(
                 "Find your groder",
@@ -103,11 +124,17 @@ class _SearchState extends State<Search> {
               child: SearchBar<Post>(
                 loader: Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 100),
-                  child: Center(child: SizedBox(width: 50, height: 50, child: new CircularProgressIndicator(
-                    color: GroderColors.green,
-                    value: null,
-                    strokeWidth: 7.0,
-                  ),),),
+                  child: Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: new CircularProgressIndicator(
+                        color: GroderColors.green,
+                        value: null,
+                        strokeWidth: 7.0,
+                      ),
+                    ),
+                  ),
                 ),
                 searchBarPadding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
@@ -151,7 +178,8 @@ class _SearchState extends State<Search> {
                                     " mi away"),
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Detail()));
+                                      builder: (context) =>
+                                          OrderFulfillment()));
                                 },
                               ),
                             ),
@@ -285,8 +313,8 @@ class _SearchState extends State<Search> {
                           post.distance.toString() +
                           " mi away"),
                       onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Detail()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => OrderFulfillment()));
                       },
                     ),
                   );

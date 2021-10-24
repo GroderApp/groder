@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:groder/payment_page.dart';
 import 'package:groder/shared/groder_colors.dart';
 
 class OrderFulfillment extends StatefulWidget {
@@ -59,295 +58,324 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Center(
-                child: Container(
-                  width: 130,
-                  child: Stack(
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+              child: new IconButton(
+                icon: new Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                height: 40,
+                width: 80,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.chat_bubble_outline,
+                    size: 30,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            Center(
+              child: Column(
+                children: [
+                  Center(
+                    child: Container(
+                      width: 130,
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("lib/assets/profile.jpeg"),
+                              radius: 65,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: CircleAvatar(
+                              radius: 21,
+                              backgroundColor: GroderColors.black,
+                              child: CircleAvatar(
+                                radius: 20,
+                                backgroundColor: GroderColors.lightGreen,
+                                child: Center(
+                                  child: Text(
+                                    "5",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 24,
+                                      color: GroderColors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "John Hull",
+                    style: TextStyle(
+                      fontSize: 34,
+                      color: GroderColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: const CircleAvatar(
-                          backgroundImage:
-                              AssetImage("lib/assets/profile.jpeg"),
-                          radius: 65,
+                      Text(
+                        "@johnchull",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: GroderColors.grey,
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: CircleAvatar(
-                          radius: 21,
-                          backgroundColor: GroderColors.black,
-                          child: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: GroderColors.lightGreen,
+                      Text(
+                        " | ",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: GroderColors.grey,
+                        ),
+                      ),
+                      Text(
+                        "3.4 mi",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: GroderColors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 25,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            "grode",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              color: GroderColors.black,
+                              fontSize: 12,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Container(
+                            width: 125,
+                            height: 25,
                             child: Center(
                               child: Text(
-                                "5",
+                                "97 A+",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 24,
-                                  color: GroderColors.black,
+                                  fontWeight: FontWeight.bold,
+                                  color: GroderColors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: GroderColors.green,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        children: [
+                          Text(
+                            "deliveries",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              color: GroderColors.black,
+                              fontSize: 12,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Container(
+                            width: 125,
+                            height: 25,
+                            child: Center(
+                              child: Text(
+                                "105",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: GroderColors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: GroderColors.green,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 25,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(25, 15, 25, 0),
+                    child: TextField(
+                      controller: _textController,
+                      cursorColor: GroderColors.green,
+                      onSubmitted: (temp) {
+                        if (temp.length == 0) return;
+                        setState(() {
+                          orders.add(temp);
+                          prices.add("\$" +
+                              (5 * Random().nextDouble()).toStringAsFixed(2));
+                          len = prices.length;
+                          sum += double.parse(
+                              prices[prices.length - 1].substring(1));
+                          _textController.clear();
+                          myFocusNode.requestFocus();
+                        });
+                      },
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(25))),
+                        hintText: 'Enter an item',
+                      ),
+                      focusNode: myFocusNode,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () {
+                              if (_textController.text.length == 0) return;
+                              setState(() {
+                                prices.add("\$" +
+                                    (5 * Random().nextDouble())
+                                        .toStringAsFixed(2));
+                                orders.add(_textController.text);
+                                len = prices.length;
+                                sum += double.parse(
+                                    prices[prices.length - 1].substring(1));
+                                _textController.clear();
+                                myFocusNode.requestFocus();
+                              });
+                            },
+                            child: Text(
+                              "+",
+                              style: TextStyle(
+                                color: GroderColors.white,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(GroderColors.green),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
                                 ),
                               ),
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 250,
+                    child: SingleChildScrollView(
+                      physics: ScrollPhysics(),
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                            physics: ScrollPhysics(),
+                            itemCount: orders.length,
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return orderTag(orders[index], index);
+                            },
+                          ),
+                        ],
                       ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    child: Divider(
+                      height: 1,
+                      color: GroderColors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("Price: \$" + sum.abs().toStringAsFixed(2)),
+                      Text("Items: " + len.toString()),
                     ],
                   ),
-                ),
-              ),
-              Text(
-                "John Hull",
-                style: TextStyle(
-                  fontSize: 34,
-                  color: GroderColors.black,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "@johnchull",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: GroderColors.grey,
-                    ),
-                  ),
-                  Text(
-                    " | ",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: GroderColors.grey,
-                    ),
-                  ),
-                  Text(
-                    "3.4 mi",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: GroderColors.grey,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Order",
+                              style: TextStyle(
+                                color: GroderColors.white,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(GroderColors.green),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        "grode",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: GroderColors.black,
-                          fontSize: 12,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Container(
-                        width: 125,
-                        height: 25,
-                        child: Center(
-                          child: Text(
-                            "97 A+",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: GroderColors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          color: GroderColors.green,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(30),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Column(
-                    children: [
-                      Text(
-                        "deliveries",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: GroderColors.black,
-                          fontSize: 12,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Container(
-                        width: 125,
-                        height: 25,
-                        child: Center(
-                          child: Text(
-                            "105",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: GroderColors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          color: GroderColors.green,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(30),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 15, 25, 0),
-                child: TextField(
-                  controller: _textController,
-                  cursorColor: GroderColors.green,
-                  onSubmitted: (temp) {
-                    if (temp.length == 0) return;
-                    setState(() {
-                      orders.add(temp);
-                      prices.add("\$" +
-                          (5 * Random().nextDouble()).toStringAsFixed(2));
-                      len = prices.length;
-                      sum +=
-                          double.parse(prices[prices.length - 1].substring(1));
-                      _textController.clear();
-                      myFocusNode.requestFocus();
-                    });
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
-                    hintText: 'Enter an item',
-                  ),
-                  focusNode: myFocusNode,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          if (_textController.text.length == 0) return;
-                          setState(() {
-                            prices.add("\$" +
-                                (5 * Random().nextDouble()).toStringAsFixed(2));
-                            orders.add(_textController.text);
-                            len = prices.length;
-                            sum += double.parse(
-                                prices[prices.length - 1].substring(1));
-                            _textController.clear();
-                            myFocusNode.requestFocus();
-                          });
-                        },
-                        child: Text(
-                          "+",
-                          style: TextStyle(
-                            color: GroderColors.white,
-                          ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(GroderColors.green),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: 250,
-                child: SingleChildScrollView(
-                  physics: ScrollPhysics(),
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        physics: ScrollPhysics(),
-                        itemCount: orders.length,
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return orderTag(orders[index], index);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  height: 1,
-                  color: GroderColors.black,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text("Price: \$" + sum.abs().toStringAsFixed(2)),
-                  Text("Items: " + len.toString()),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Order",
-                          style: TextStyle(
-                            color: GroderColors.white,
-                          ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(GroderColors.green),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
