@@ -78,13 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  flappy_search_bar_ns:
-    dependency: "direct main"
-    description:
-      name: flappy_search_bar_ns
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
   firebase:
     dependency: transitive
     description:
@@ -155,6 +148,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  flappy_search_bar_ns:
+    dependency: "direct main"
+    description:
+      name: flappy_search_bar_ns
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -186,8 +186,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  http:
-    dependency: "direct main"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -201,7 +199,7 @@ packages:
     source: hosted
     version: "0.14.3"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -368,8 +366,4 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.14.0 <3.0.0"
-<<<<<<< Updated upstream
-  flutter: ">=1.16.0"
-=======
-  flutter: ">=2.0.0"
->>>>>>> Stashed changes
+  flutter: ">=1.24.0-6.0.pre"

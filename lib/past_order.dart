@@ -93,30 +93,6 @@ class PastOrder extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "950 W Preachtree St NW",
-                  style: TextStyle(
-                    shadows: const [
-                      Shadow(color: Colors.black, offset: Offset(0, -3))
-                    ],
-                    color: Colors.transparent,
-                    decoration: TextDecoration.underline,
-                    decorationColor: GroderColors.green,
-                    decorationThickness: 2,
-                  ),
-                ),
-                IconButton(
-                  constraints: BoxConstraints(),
-                  onPressed: () {},
-                  icon: const Icon(Icons.map),
-                  iconSize: 20,
-                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 5),
-                )
-              ],
-            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

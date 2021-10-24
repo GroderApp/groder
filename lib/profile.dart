@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groder/end_drawer.dart';
 import 'package:groder/past_order.dart';
 import 'package:groder/services/authentication_service.dart';
 import 'package:groder/shared/groder_colors.dart';
@@ -12,9 +13,13 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
+      endDrawer: EndDrawer(),
       body: DefaultTabController(
         length: 3,
         child: SafeArea(
@@ -25,8 +30,36 @@ class _ProfileState extends State<Profile> {
                 child: new IconButton(
                   icon: new Icon(Icons.arrow_back_ios),
                   onPressed: () {
-                    context.read<AuthenticationService>().signOut();
+                    Navigator.pop(context);
                   },
+                ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  height: 40,
+                  width: 120,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.chat_bubble_outline,
+                          size: 30,
+                        ),
+                        onPressed: () {},
+                      ),
+                      SizedBox(width: 10),
+                      IconButton(
+                        icon: Icon(
+                          Icons.settings_outlined,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          _key.currentState!.openEndDrawer();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Center(
@@ -54,18 +87,6 @@ class _ProfileState extends State<Profile> {
                             color: GroderColors.grey,
                           ),
                         ),
-                      ),
-                      Container(
-                        width: 125,
-                        height: 25,
-                        child: Center(
-                          child: Text(
-                            "97 A+",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: GroderColors.white,
-                              fontSize: 12,
-                            ),
                         Text(
                           " | ",
                           style: TextStyle(
@@ -79,30 +100,6 @@ class _ProfileState extends State<Profile> {
                             color: GroderColors.grey,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Column(
-                    children: [
-                      Text(
-                        "deliveries",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: GroderColors.black,
-                          fontSize: 12,
-                        ),
-                      ),
-                      Container(
-                        width: 125,
-                        height: 25,
-                        child: Center(
-                          child: Text(
-                            "105",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: GroderColors.white,
-                              fontSize: 12,
                       ],
                     ),
                     Row(
@@ -120,7 +117,7 @@ class _ProfileState extends State<Profile> {
                                 fontSize: 12,
                               ),
                             ),
-                            SizedBox(height : 5),
+                            SizedBox(height: 5),
                             Container(
                               width: 125,
                               height: 25,
@@ -154,7 +151,7 @@ class _ProfileState extends State<Profile> {
                                 fontSize: 12,
                               ),
                             ),
-                            SizedBox(height : 5),
+                            SizedBox(height: 5),
                             Container(
                               width: 125,
                               height: 25,
@@ -190,113 +187,59 @@ class _ProfileState extends State<Profile> {
                         child: AppBar(
                           elevation: 0,
                           backgroundColor: Colors.white12,
-                          bottom: TabBar(labelColor: GroderColors.black, tabs: const [
-                            Tab(child: Text("Publix")),
-                            Tab(child: Text("Costco")),
-                            Tab(child: Text("Wawa")),
-                          ]),
+                          bottom: TabBar(
+                              labelColor: GroderColors.black,
+                              tabs: const [
+                                Tab(child: Text("Publix")),
+                                Tab(child: Text("Costco")),
+                                Tab(child: Text("Wawa")),
+                              ]),
                         )),
                     Expanded(
                         child: TabBarView(
-                          children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: const [
-                                  SizedBox(height: 10),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                ],
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: const [
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                ],
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: const [
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )),
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: const [
+                              SizedBox(height: 10),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                            ],
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: const [
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                            ],
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: const [
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              SizedBox(
-                  height: 50,
-                  child: AppBar(
-                    elevation: 0,
-                    backgroundColor: Colors.white12,
-                    bottom: TabBar(labelColor: GroderColors.black, tabs: const [
-                      Tab(child: Text("Publix")),
-                      Tab(child: Text("Costco")),
-                      Tab(child: Text("Wawa")),
-                    ]),
-                  )),
-              Expanded(
-                  child: TabBarView(
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: const [
-                        SizedBox(height: 10),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                      ],
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: const [
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                      ],
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: const [
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                      ],
-                    ),
-                  ),
-                ],
-              )),
             ],
           ),
         ),

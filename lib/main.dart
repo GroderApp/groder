@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           ],
           child: MaterialApp(
             title: 'Groder',
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: 'Poppins',
               primarySwatch: GroderColors.greenMaterial,
@@ -51,7 +52,7 @@ class AuthenticationWrapper extends StatelessWidget {
     if(firebaseUser == null) {
       return Authenticate();
     } else {
-      return Profile();
+      return Search();
     }
   }
 }
