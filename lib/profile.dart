@@ -12,48 +12,75 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-        endDrawer: Container(
-          width: 200,
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60)),
-            child: Drawer(
-              elevation: 0,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 50),
-                  ListTile(
-                  title: new Text("Privacy", style: TextStyle(fontSize: 17),),
-                  leading: new Icon(Icons.privacy_tip_outlined, color: GroderColors.green, size: 28,),
+      endDrawer: Container(
+        width: 200,
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60)),
+          child: Drawer(
+            elevation: 0,
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 50),
+                ListTile(
+                  title: new Text(
+                    "Privacy",
+                    style: TextStyle(fontSize: 17),
                   ),
-                  ListTile(
-                  title: new Text("Edit Profile", style: TextStyle(fontSize: 18),),
-                  leading: new Icon(Icons.person_outlined, color: GroderColors.green, size: 28,),
+                  leading: new Icon(
+                    Icons.privacy_tip_outlined,
+                    color: GroderColors.green,
+                    size: 28,
                   ),
-                  ListTile(
-                  title: new Text("View TOS", style: TextStyle(fontSize: 17),),
-                  leading: new Icon(Icons.help_outline, color: GroderColors.green, size: 28,),
+                ),
+                ListTile(
+                  title: new Text(
+                    "Edit Profile",
+                    style: TextStyle(fontSize: 18),
                   ),
-                  GestureDetector(
-                    child: ListTile(
-                    title: new Text("Log out", style: TextStyle(fontSize: 17),),
-                    leading: new Icon(Icons.logout_outlined, color: GroderColors.green, size: 28,),
+                  leading: new Icon(
+                    Icons.person_outlined,
+                    color: GroderColors.green,
+                    size: 28,
+                  ),
+                ),
+                ListTile(
+                  title: new Text(
+                    "View TOS",
+                    style: TextStyle(fontSize: 17),
+                  ),
+                  leading: new Icon(
+                    Icons.help_outline,
+                    color: GroderColors.green,
+                    size: 28,
+                  ),
+                ),
+                GestureDetector(
+                  child: ListTile(
+                    title: new Text(
+                      "Log out",
+                      style: TextStyle(fontSize: 17),
                     ),
-                    onTap: () {
-                      context.read<AuthenticationService>().signOut();
-                    },
-                  )
-                ],
-              ),
+                    leading: new Icon(
+                      Icons.logout_outlined,
+                      color: GroderColors.green,
+                      size: 28,
+                    ),
+                  ),
+                  onTap: () {
+                    context.read<AuthenticationService>().signOut();
+                  },
+                )
+              ],
             ),
           ),
         ),
+      ),
       body: DefaultTabController(
         length: 3,
         child: SafeArea(
@@ -76,13 +103,18 @@ class _ProfileState extends State<Profile> {
                   child: Row(
                     children: [
                       IconButton(
-                        icon: Icon(Icons.chat_bubble_outline, size: 30,),
-                        onPressed: () {
-                        },
+                        icon: Icon(
+                          Icons.chat_bubble_outline,
+                          size: 30,
+                        ),
+                        onPressed: () {},
                       ),
                       SizedBox(width: 10),
                       IconButton(
-                        icon: Icon(Icons.settings_outlined, size: 30,),
+                        icon: Icon(
+                          Icons.settings_outlined,
+                          size: 30,
+                        ),
                         onPressed: () {
                           _key.currentState!.openEndDrawer();
                         },
@@ -116,18 +148,6 @@ class _ProfileState extends State<Profile> {
                             color: GroderColors.grey,
                           ),
                         ),
-                      ),
-                      Container(
-                        width: 125,
-                        height: 25,
-                        child: Center(
-                          child: Text(
-                            "97 A+",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: GroderColors.white,
-                              fontSize: 12,
-                            ),
                         Text(
                           " | ",
                           style: TextStyle(
@@ -141,30 +161,6 @@ class _ProfileState extends State<Profile> {
                             color: GroderColors.grey,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Column(
-                    children: [
-                      Text(
-                        "deliveries",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: GroderColors.black,
-                          fontSize: 12,
-                        ),
-                      ),
-                      Container(
-                        width: 125,
-                        height: 25,
-                        child: Center(
-                          child: Text(
-                            "105",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: GroderColors.white,
-                              fontSize: 12,
                       ],
                     ),
                     Row(
@@ -182,7 +178,7 @@ class _ProfileState extends State<Profile> {
                                 fontSize: 12,
                               ),
                             ),
-                            SizedBox(height : 5),
+                            SizedBox(height: 5),
                             Container(
                               width: 125,
                               height: 25,
@@ -216,7 +212,7 @@ class _ProfileState extends State<Profile> {
                                 fontSize: 12,
                               ),
                             ),
-                            SizedBox(height : 5),
+                            SizedBox(height: 5),
                             Container(
                               width: 125,
                               height: 25,
@@ -252,113 +248,59 @@ class _ProfileState extends State<Profile> {
                         child: AppBar(
                           elevation: 0,
                           backgroundColor: Colors.white12,
-                          bottom: TabBar(labelColor: GroderColors.black, tabs: const [
-                            Tab(child: Text("Publix")),
-                            Tab(child: Text("Costco")),
-                            Tab(child: Text("Wawa")),
-                          ]),
+                          bottom: TabBar(
+                              labelColor: GroderColors.black,
+                              tabs: const [
+                                Tab(child: Text("Publix")),
+                                Tab(child: Text("Costco")),
+                                Tab(child: Text("Wawa")),
+                              ]),
                         )),
                     Expanded(
                         child: TabBarView(
-                          children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: const [
-                                  SizedBox(height: 10),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                ],
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: const [
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                ],
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: const [
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                  PastOrder(),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )),
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: const [
+                              SizedBox(height: 10),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                            ],
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: const [
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                            ],
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: const [
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                              PastOrder(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              SizedBox(
-                  height: 50,
-                  child: AppBar(
-                    elevation: 0,
-                    backgroundColor: Colors.white12,
-                    bottom: TabBar(labelColor: GroderColors.black, tabs: const [
-                      Tab(child: Text("Publix")),
-                      Tab(child: Text("Costco")),
-                      Tab(child: Text("Wawa")),
-                    ]),
-                  )),
-              Expanded(
-                  child: TabBarView(
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: const [
-                        SizedBox(height: 10),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                      ],
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: const [
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                      ],
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: const [
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                        PastOrder(),
-                      ],
-                    ),
-                  ),
-                ],
-              )),
             ],
           ),
         ),
