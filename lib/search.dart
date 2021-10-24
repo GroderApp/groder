@@ -43,6 +43,10 @@ class _SearchState extends State<Search> {
     Post("Cali Francis", "Sams", 3.7),
     Post("Sarah Johnson", "Publix", 1.4),
     Post("Bill Joe", "Walmart", 1.6),
+    Post("Casey Junkin", "Costco", 7.9),
+    Post("Eva Long", "Aldis", 4.7),
+    Post("Kali Watt", "HEB", 2.4),
+    Post("James Harden", "Kroger", 5.6),
   ];
 
   Future<List<Post>> _getAllPosts(String? text) async {
