@@ -49,10 +49,8 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();
     if(firebaseUser == null) {
-      print("Signed out");
       return Authenticate();
     } else {
-      print("Signed In");
       return Profile();
     }
   }

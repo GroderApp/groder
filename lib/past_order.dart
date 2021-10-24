@@ -29,7 +29,7 @@ class PastOrder extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 25,
-        vertical: 25,
+        vertical: 15,
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -38,10 +38,18 @@ class PastOrder extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: GroderColors.lightGreen,
-          border: Border.all(
-            color: GroderColors.blue,
-            width: 2,
-          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          // border: Border.all(
+          //   color: GroderColors.blue,
+          //   width: 2,
+          // ),
           borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
@@ -84,6 +92,7 @@ class PastOrder extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 10),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -100,10 +109,11 @@ class PastOrder extends StatelessWidget {
                   ),
                 ),
                 IconButton(
+                  constraints: BoxConstraints(),
                   onPressed: () {},
                   icon: const Icon(Icons.map),
                   iconSize: 20,
-                  padding: const EdgeInsets.fromLTRB(0, 0, 15, 2),
+                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 5),
                 )
               ],
             ),
@@ -120,6 +130,7 @@ class PastOrder extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 5),
             Row(
               children: [
                 Container(
@@ -127,11 +138,15 @@ class PastOrder extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                     color: GroderColors.white,
-                    border: Border.all(
-                      color: GroderColors.blue,
-                      width: 2,
-                    ),
                     borderRadius: const BorderRadius.all(Radius.circular(18)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: const Icon(Icons.expand_more),
                 ),
@@ -165,10 +180,6 @@ class PastOrder extends StatelessWidget {
                       height: 35,
                       decoration: BoxDecoration(
                         color: GroderColors.grey,
-                        border: Border.all(
-                          color: GroderColors.black,
-                          width: 1,
-                        ),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(18)),
                       ),

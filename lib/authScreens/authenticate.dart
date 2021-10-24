@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:groder/authScreens/sign_in.dart';
+import 'package:groder/shared/groder_colors.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({Key? key}) : super(key: key);
@@ -27,13 +28,13 @@ class _AuthenticateState extends State<Authenticate> {
                     height: 180,
                   ),
                   Text(
-                    "Groder",
+                    "groder",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: GroderColors.green,
                         fontSize: 70,
-                        fontWeight: FontWeight.w200),
+                        fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(height: 160),
+                  SizedBox(height: 150),
                   SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,12 +60,13 @@ class _AuthenticateState extends State<Authenticate> {
                                   ),
                                   borderRadius: BorderRadius.circular(20),
                                   color: loginTapped
-                                      ? Colors.lightGreen
+                                      ? GroderColors.green
                                       : Colors.black),
                               child: Center(
                                 child: Text(
                                   "login",
                                   style: TextStyle(
+                                    fontSize: 20,
                                       color: loginTapped
                                           ? Colors.black
                                           : Colors.white),
@@ -94,12 +96,13 @@ class _AuthenticateState extends State<Authenticate> {
                                       ),
                                       borderRadius: BorderRadius.circular(20),
                                       color: loginTapped
-                                          ? Colors.lightGreen
+                                          ? GroderColors.green
                                           : Colors.black),
                                   child: Center(
                                     child: Text(
                                       "login",
                                       style: TextStyle(
+                                          fontSize: 20,
                                           color: loginTapped
                                               ? Colors.black
                                               : Colors.white),
@@ -126,7 +129,7 @@ class _AuthenticateState extends State<Authenticate> {
                                   child: Center(
                                     child: Text(
                                       "with email",
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -145,7 +148,7 @@ class _AuthenticateState extends State<Authenticate> {
                                   child: Center(
                                     child: Text(
                                       "with google",
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -164,7 +167,7 @@ class _AuthenticateState extends State<Authenticate> {
                                   child: Center(
                                     child: Text(
                                       "with apple",
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -200,12 +203,13 @@ class _AuthenticateState extends State<Authenticate> {
                                   ),
                                   borderRadius: BorderRadius.circular(20),
                                   color: registerTapped
-                                      ? Colors.lightGreen
+                                      ? GroderColors.green
                                       : Colors.black),
                               child: Center(
                                 child: Text(
                                   "register",
                                   style: TextStyle(
+                                      fontSize: 20,
                                       color: registerTapped
                                           ? Colors.black
                                           : Colors.white),
@@ -235,12 +239,13 @@ class _AuthenticateState extends State<Authenticate> {
                                       ),
                                       borderRadius: BorderRadius.circular(20),
                                       color: registerTapped
-                                          ? Colors.lightGreen
+                                          ? GroderColors.green
                                           : Colors.black),
                                   child: Center(
                                     child: Text(
                                       "register",
                                       style: TextStyle(
+                                          fontSize: 20,
                                           color: registerTapped
                                               ? Colors.black
                                               : Colors.white),
@@ -262,7 +267,7 @@ class _AuthenticateState extends State<Authenticate> {
                                   child: Center(
                                     child: Text(
                                       "with email",
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -281,7 +286,7 @@ class _AuthenticateState extends State<Authenticate> {
                                   child: Center(
                                     child: Text(
                                       "with google",
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -300,7 +305,7 @@ class _AuthenticateState extends State<Authenticate> {
                                   child: Center(
                                     child: Text(
                                       "with apple",
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
                                     ),
                                   ),
                                 ),

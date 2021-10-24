@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:groder/authScreens/sign_up.dart';
 import 'package:groder/services/authentication_service.dart';
+import 'package:groder/shared/groder_colors.dart';
 import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
@@ -35,18 +36,18 @@ class _SignInState extends State<SignIn> {
                 Text(
                   "login",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: GroderColors.green,
                     fontSize: 70,
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 160),
+                SizedBox(height: 140),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   width: size.width * 0.8,
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: GroderColors.lightGreen,
                     borderRadius: BorderRadius.circular(29),
                   ),
                   child: TextFormField(
@@ -60,7 +61,7 @@ class _SignInState extends State<SignIn> {
                     },
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person, color: Colors.green),
+                      icon: Icon(Icons.person, color: GroderColors.green),
                       hintText: "email",
                       border: InputBorder.none,
                     ),
@@ -71,7 +72,7 @@ class _SignInState extends State<SignIn> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   width: size.width * 0.8,
                   decoration: BoxDecoration(
-                    color: Colors.lightGreen,
+                    color: GroderColors.lightGreen,
                     borderRadius: BorderRadius.circular(29),
                   ),
                   child: TextFormField(
@@ -84,16 +85,14 @@ class _SignInState extends State<SignIn> {
                       hintText: "password",
                       icon: Icon(
                         Icons.lock,
-                        color: Colors.green,
+                        color: GroderColors.green,
                       ),
-                      suffix: InkWell(
-                        child: Icon(
-                          obscurePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Colors.green,
-                        ),
-                        onTap: () {
+                      suffix: IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: BoxConstraints(),
+                        icon: obscurePassword ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
+                        color: GroderColors.grey,
+                        onPressed: () {
                           setState(() {
                             obscurePassword = !obscurePassword;
                           });
@@ -111,11 +110,14 @@ class _SignInState extends State<SignIn> {
                     child: FlatButton(
                       padding:
                       EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                      color: Colors.lightGreen,
-                      onPressed: () {
-                        print("hello");
-                        context.read<AuthenticationService>().signIn(email, password);
-                        Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+                      color: GroderColors.green,
+                      onPressed: () async {
+                        String toReturn = await context.read<AuthenticationService>().signIn(email, password);
+                        if(toReturn == "worked") {
+                          Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+                        } else {
+
+                        }
                       },
                       child: Text(
                         "login",
@@ -130,7 +132,7 @@ class _SignInState extends State<SignIn> {
                   children: <Widget>[
                     Text(
                       "Don’t have an Account? ",
-                      style: TextStyle(color: Colors.lightGreen),
+                      style: TextStyle(color: GroderColors.darkGrey),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -146,8 +148,8 @@ class _SignInState extends State<SignIn> {
                       child: Text(
                         "Sign Up",
                         style: TextStyle(
-                          color: Colors.lightGreen,
-                          fontWeight: FontWeight.bold,
+                          color: GroderColors.darkGrey,
+                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
