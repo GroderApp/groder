@@ -4,7 +4,11 @@ import 'package:flappy_search_bar_ns/flappy_search_bar_ns.dart';
 import 'package:flappy_search_bar_ns/scaled_tile.dart';
 import 'package:flappy_search_bar_ns/search_bar_style.dart';
 import 'package:flutter/material.dart';
+import 'package:groder/chat.dart';
+import 'package:groder/end_drawer.dart';
 import 'package:groder/profile.dart';
+import 'package:groder/services/authentication_service.dart';
+import 'package:provider/provider.dart';
 
 import 'shared/groder_colors.dart';
 
@@ -25,6 +29,8 @@ class Post {
 
 class _SearchState extends State<Search> {
   final SearchBarController<Post> _searchBarController = SearchBarController();
+
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   bool toggle = false;
   String inputtext = "";
@@ -56,11 +62,32 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     posts.sort((a, b) => a.distance.compareTo(b.distance));
     return Scaffold(
+      key: _key,
+      endDrawer: EndDrawer(),
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(
-              height: 50,
+            Row(
+              children: [
+                SizedBox(width: 3,),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()),);
+                    },
+                    icon: Icon(Icons.person_outlined, size: 30,),),
+                Spacer(),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()),);
+                  },
+                  icon: Icon(Icons.chat_bubble_outline, size: 30,),),
+                SizedBox(width: 10,),
+                IconButton(
+                  onPressed: () {
+                    _key.currentState!.openEndDrawer();
+                  },
+                  icon: Icon(Icons.settings_outlined, size: 30,),),
+                ]
             ),
             Center(
               child: Text(
@@ -74,6 +101,14 @@ class _SearchState extends State<Search> {
             ),
             Expanded(
               child: SearchBar<Post>(
+                loader: Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 100),
+                  child: Center(child: SizedBox(width: 50, height: 50, child: new CircularProgressIndicator(
+                    color: GroderColors.green,
+                    value: null,
+                    strokeWidth: 7.0,
+                  ),),),
+                ),
                 searchBarPadding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
                 headerPadding:
@@ -94,7 +129,7 @@ class _SearchState extends State<Search> {
                             padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: GroderColors.lightGreen,
+                                color: GroderColors.white,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.2),
@@ -128,6 +163,7 @@ class _SearchState extends State<Search> {
                 ),
                 cancellationWidget: const Text("Cancel"),
                 header: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
                       child: Text("Location"),
@@ -152,7 +188,7 @@ class _SearchState extends State<Search> {
                         ),
                         backgroundColor: !toggle
                             ? MaterialStateProperty.all<Color>(
-                                GroderColors.green)
+                                GroderColors.lightGreen)
                             : MaterialStateProperty.all<Color>(
                                 GroderColors.white),
                         shape:
@@ -194,7 +230,7 @@ class _SearchState extends State<Search> {
                         ),
                         backgroundColor: toggle
                             ? MaterialStateProperty.all<Color>(
-                                GroderColors.green)
+                                GroderColors.lightGreen)
                             : MaterialStateProperty.all<Color>(
                                 GroderColors.white),
                         shape:
@@ -218,7 +254,7 @@ class _SearchState extends State<Search> {
                   });
                 },
                 searchBarStyle: SearchBarStyle(
-                  backgroundColor: GroderColors.lightGreen,
+                  backgroundColor: Colors.grey.shade300,
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   borderRadius: const BorderRadius.all(Radius.circular(25)),
                 ),
@@ -227,8 +263,9 @@ class _SearchState extends State<Search> {
                 crossAxisCount: 1,
                 onItemFound: (Post? post, int index) {
                   return Container(
+                    margin: new EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
-                      color: GroderColors.lightGreen,
+                      color: GroderColors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       boxShadow: [
                         BoxShadow(

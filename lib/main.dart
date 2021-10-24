@@ -52,7 +52,7 @@ class AuthenticationWrapper extends StatelessWidget {
     if(firebaseUser == null) {
       return Authenticate();
     } else {
-      return Profile();
+      return Search();
     }
   }
 }
