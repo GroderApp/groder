@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:groder/profile.dart';
 import 'package:groder/shared/groder_colors.dart';
 
+import 'search.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -36,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Profile(),
+        child: Search(),
       ),
     );
   }

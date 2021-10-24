@@ -138,7 +138,7 @@ class _ProfileState extends State<Profile> {
                   child: AppBar(
                     elevation: 0,
                     backgroundColor: Colors.white12,
-                    bottom: TabBar(labelColor: GroderColors.black, tabs: [
+                    bottom: TabBar(labelColor: GroderColors.black, tabs: const [
                       Tab(child: Text("Publix")),
                       Tab(child: Text("Costco")),
                       Tab(child: Text("Wawa")),

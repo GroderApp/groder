@@ -18,6 +18,7 @@ class GroderColors {
   static final Color grey = const Color(0xffBCB8B8);
   static final Color darkGrey = const Color(0xff565656);
   static final Color green = const Color(0xff2ecc71);
+  static final Color lightBlue = const Color(0xffE4F4FB);
   static final Color blue = const Color(0xff3d9cdb);
   static final Color lightGreen = const Color(0xffD9FDEE);
   static final Color white = const Color(0xffFFFFFF);
