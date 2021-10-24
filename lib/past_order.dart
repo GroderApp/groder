@@ -38,10 +38,18 @@ class PastOrder extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: GroderColors.lightGreen,
-          border: Border.all(
-            color: GroderColors.blue,
-            width: 2,
-          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          // border: Border.all(
+          //   color: GroderColors.blue,
+          //   width: 2,
+          // ),
           borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
@@ -84,8 +92,30 @@ class PastOrder extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(height: 10),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "950 W Preachtree St NW",
+                  style: TextStyle(
+                    shadows: const [
+                      Shadow(color: Colors.black, offset: Offset(0, -3))
+                    ],
+                    color: Colors.transparent,
+                    decoration: TextDecoration.underline,
+                    decorationColor: GroderColors.green,
+                    decorationThickness: 2,
+                  ),
+                ),
+                IconButton(
+                  constraints: BoxConstraints(),
+                  onPressed: () {},
+                  icon: const Icon(Icons.map),
+                  iconSize: 20,
+                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 5),
+                )
+              ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,6 +158,7 @@ class PastOrder extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 5),
             Row(
               children: [
                 Container(
@@ -135,11 +166,15 @@ class PastOrder extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                     color: GroderColors.white,
-                    border: Border.all(
-                      color: GroderColors.blue,
-                      width: 2,
-                    ),
                     borderRadius: const BorderRadius.all(Radius.circular(18)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: const Icon(Icons.expand_more),
                 ),
@@ -173,10 +208,6 @@ class PastOrder extends StatelessWidget {
                       height: 35,
                       decoration: BoxDecoration(
                         color: GroderColors.grey,
-                        border: Border.all(
-                          color: GroderColors.black,
-                          width: 1,
-                        ),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(18)),
                       ),
