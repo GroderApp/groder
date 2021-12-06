@@ -105,7 +105,7 @@ class _SearchState extends State<Search> {
   }
 
   Future<List<GroderProfile>> _getAllPosts(String? text) async {
-    await Future.delayed(Duration(seconds: text!.length == 3 ? 10 : 1));
+    await Future.delayed(Duration(seconds: text!.length == 1 ? 3 : 1));
     inputtext = text;
     List<GroderProfile> posts2 = [];
     if (!toggle) {
