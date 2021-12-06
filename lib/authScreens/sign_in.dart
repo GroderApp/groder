@@ -33,7 +33,7 @@ class _SignInState extends State<SignIn> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: 180,
+                  height: 100,
                 ),
                 Text(
                   "login",
