@@ -93,6 +93,10 @@ class _SearchState extends State<Search> {
             Text(post.distance.toString() + " mi away"),
           ],
         ),
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundImage: AssetImage(post.asset),
+        ),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -145,7 +149,7 @@ class _SearchState extends State<Search> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Profile()),
+                    MaterialPageRoute(builder: (context) => const Profile()),
                   );
                 },
                 icon: const Icon(
@@ -255,6 +259,11 @@ class _SearchState extends State<Search> {
                                         " mi away"),
                                   ],
                                 ),
+                                leading: CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage:
+                                      AssetImage(posts[index].asset),
+                                ),
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -275,41 +284,47 @@ class _SearchState extends State<Search> {
                 header: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    TextButton(
-                      child: const Text("Location"),
-                      onPressed: () {
-                        setState(() {
-                          toggle = !toggle;
-                        });
-                        if (toggle) {
-                          _searchBarController.sortList((a, b) =>
-                              a.name.compareTo(inputtext) -
-                              b.name.compareTo(inputtext));
-                        } else {
-                          _searchBarController.sortList((a, b) =>
-                              a.location.compareTo(inputtext) -
-                              b.location.compareTo(inputtext));
-                        }
-                      },
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.symmetric(
-                            horizontal: 15,
-                          ),
-                        ),
-                        backgroundColor: !toggle
-                            ? MaterialStateProperty.all<Color>(
-                                GroderColors.lightGreen)
-                            : MaterialStateProperty.all<Color>(
-                                GroderColors.white),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(
-                              color: !toggle
-                                  ? Colors.transparent
-                                  : GroderColors.green,
+                    Expanded(
+                      child: Center(
+                        child: TextButton(
+                          child: const Text("Location"),
+                          onPressed: () {
+                            setState(() {
+                              toggle = !toggle;
+                            });
+                            if (toggle) {
+                              _searchBarController.sortList((a, b) =>
+                                  a.name.compareTo(inputtext) -
+                                  b.name.compareTo(inputtext));
+                            } else {
+                              _searchBarController.sortList((a, b) =>
+                                  a.location.compareTo(inputtext) -
+                                  b.location.compareTo(inputtext));
+                            }
+                          },
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size(200, 35)),
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                              const EdgeInsets.symmetric(
+                                horizontal: 15,
+                              ),
+                            ),
+                            backgroundColor: !toggle
+                                ? MaterialStateProperty.all<Color>(
+                                    GroderColors.lightGreen)
+                                : MaterialStateProperty.all<Color>(
+                                    GroderColors.white),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(
+                                  color: !toggle
+                                      ? Colors.transparent
+                                      : GroderColors.green,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -318,41 +333,47 @@ class _SearchState extends State<Search> {
                     const SizedBox(
                       width: 10,
                     ),
-                    TextButton(
-                      child: const Text("Name"),
-                      onPressed: () {
-                        setState(() {
-                          toggle = !toggle;
-                        });
-                        if (toggle) {
-                          _searchBarController.sortList((a, b) =>
-                              a.name.compareTo(inputtext) -
-                              b.name.compareTo(inputtext));
-                        } else {
-                          _searchBarController.sortList((a, b) =>
-                              a.location.compareTo(inputtext) -
-                              b.location.compareTo(inputtext));
-                        }
-                      },
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.symmetric(
-                            horizontal: 15,
-                          ),
-                        ),
-                        backgroundColor: toggle
-                            ? MaterialStateProperty.all<Color>(
-                                GroderColors.lightGreen)
-                            : MaterialStateProperty.all<Color>(
-                                GroderColors.white),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(
-                              color: toggle
-                                  ? Colors.transparent
-                                  : GroderColors.green,
+                    Expanded(
+                      child: Center(
+                        child: TextButton(
+                          child: const Text("Name"),
+                          onPressed: () {
+                            setState(() {
+                              toggle = !toggle;
+                            });
+                            if (toggle) {
+                              _searchBarController.sortList((a, b) =>
+                                  a.name.compareTo(inputtext) -
+                                  b.name.compareTo(inputtext));
+                            } else {
+                              _searchBarController.sortList((a, b) =>
+                                  a.location.compareTo(inputtext) -
+                                  b.location.compareTo(inputtext));
+                            }
+                          },
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size(200, 35)),
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                              const EdgeInsets.symmetric(
+                                horizontal: 15,
+                              ),
+                            ),
+                            backgroundColor: toggle
+                                ? MaterialStateProperty.all<Color>(
+                                    GroderColors.lightGreen)
+                                : MaterialStateProperty.all<Color>(
+                                    GroderColors.white),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(
+                                  color: toggle
+                                      ? Colors.transparent
+                                      : GroderColors.green,
+                                ),
+                              ),
                             ),
                           ),
                         ),
