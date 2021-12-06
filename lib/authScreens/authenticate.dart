@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:groder/authScreens/sign_in.dart';
+import 'package:groder/authScreens/sign_up.dart';
 import 'package:groder/shared/groder_colors.dart';
 
 class Authenticate extends StatefulWidget {
@@ -25,7 +26,7 @@ class _AuthenticateState extends State<Authenticate> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 180,
+                    height: 100,
                   ),
                   Text(
                     "groder",
@@ -34,7 +35,7 @@ class _AuthenticateState extends State<Authenticate> {
                         fontSize: 70,
                         fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(height: 150),
+                  SizedBox(height: 75),
                   SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -257,7 +258,12 @@ class _AuthenticateState extends State<Authenticate> {
                                 height: 20,
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignUp()));
+                                },
                                 child: Container(
                                   height: 50,
                                   width: 350,
