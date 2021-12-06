@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:groder/shared/groder_colors.dart';
+import 'package:groder/profile.dart';
 
 class PastOrder extends StatelessWidget {
-  const PastOrder({Key? key}) : super(key: key);
+  PastOrderData data;
+  PastOrder({required this.data, Key? key}) : super(key: key);
 
   Widget groceryCategoryTag(String name) {
     return Container(
@@ -24,8 +26,22 @@ class PastOrder extends StatelessWidget {
     );
   }
 
+  String store = "";
+  String img = "";
+  String location = "";
+  String date = "";
+  List<String> categories = [];
+  List<String> people = [];
+
   @override
   Widget build(BuildContext context) {
+    store = data.store;
+    location = data.location;
+    categories = data.categories;
+    date = data.date;
+    people = data.people;
+    img = data.img;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 25,
@@ -43,13 +59,9 @@ class PastOrder extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
-          // border: Border.all(
-          //   color: GroderColors.blue,
-          //   width: 2,
-          // ),
           borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
@@ -57,8 +69,8 @@ class PastOrder extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage("lib/assets/profile.jpeg"),
+                CircleAvatar(
+                  backgroundImage: AssetImage(img),
                   radius: 25,
                 ),
                 const SizedBox(
@@ -67,9 +79,9 @@ class PastOrder extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Publix",
-                      style: TextStyle(
+                    Text(
+                      store,
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                       ),
@@ -83,23 +95,23 @@ class PastOrder extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
-                const Text(
-                  "11/27/21",
-                  style: TextStyle(
+                const Spacer(),
+                Text(
+                  date,
+                  style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Text(
-                      "950 W Preachtree St NW",
+                      location,
                       style: TextStyle(
                         shadows: const [
                           Shadow(color: Colors.black, offset: Offset(0, -3))
@@ -125,16 +137,22 @@ class PastOrder extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        groceryCategoryTag("Home"),
-                        groceryCategoryTag("Kitchen"),
-                        groceryCategoryTag("Meals"),
+                        categories.length >= 1
+                            ? groceryCategoryTag(categories[0])
+                            : Container(),
+                        categories.length >= 2
+                            ? groceryCategoryTag(categories[1])
+                            : Container(),
+                        categories.length >= 3
+                            ? groceryCategoryTag(categories[2])
+                            : Container(),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Row(
               children: [
                 Container(
@@ -148,7 +166,8 @@ class PastOrder extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 1,
                         blurRadius: 3,
-                        offset: Offset(0, 1), // changes position of shadow
+                        offset:
+                            const Offset(0, 1), // changes position of shadow
                       ),
                     ],
                   ),
@@ -158,27 +177,36 @@ class PastOrder extends StatelessWidget {
                 Stack(
                   alignment: Alignment.centerRight,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 45, 0),
-                      child: const CircleAvatar(
-                        radius: 17,
-                        backgroundImage: AssetImage("lib/assets/profile.jpeg"),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 30, 0),
-                      child: const CircleAvatar(
-                        radius: 17,
-                        backgroundImage: AssetImage("lib/assets/profile.jpeg"),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                      child: const CircleAvatar(
-                        radius: 17,
-                        backgroundImage: AssetImage("lib/assets/profile.jpeg"),
-                      ),
-                    ),
+                    people.isNotEmpty
+                        ? Container(
+                            margin:
+                                EdgeInsets.fromLTRB(0, 0, (45).toDouble(), 0),
+                            child: CircleAvatar(
+                              radius: 17,
+                              backgroundImage: AssetImage(people[0]),
+                            ),
+                          )
+                        : Container(),
+                    people.length >= 2
+                        ? Container(
+                            margin:
+                                EdgeInsets.fromLTRB(0, 0, (30).toDouble(), 0),
+                            child: CircleAvatar(
+                              radius: 17,
+                              backgroundImage: AssetImage(people[1]),
+                            ),
+                          )
+                        : Container(),
+                    people.length >= 3
+                        ? Container(
+                            margin:
+                                EdgeInsets.fromLTRB(0, 0, (15).toDouble(), 0),
+                            child: CircleAvatar(
+                              radius: 17,
+                              backgroundImage: AssetImage(people[2]),
+                            ),
+                          )
+                        : Container(),
                     Container(
                       width: 35,
                       height: 35,
@@ -187,8 +215,12 @@ class PastOrder extends StatelessWidget {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(18)),
                       ),
-                      child: const Center(
-                        child: Text("+5"),
+                      child: Center(
+                        child: Text(
+                          "+" +
+                              (people.length - 3 >= 0 ? people.length - 3 : 0)
+                                  .toString(),
+                        ),
                       ),
                     ),
                   ],

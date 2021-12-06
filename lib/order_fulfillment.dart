@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:groder/search.dart';
 import 'package:groder/shared/groder_colors.dart';
 
 class OrderFulfillment extends StatefulWidget {
-  const OrderFulfillment({Key? key}) : super(key: key);
+  GroderProfile profile;
+  OrderFulfillment({required this.profile, Key? key}) : super(key: key);
 
   @override
   _OrderFulfillmentState createState() => _OrderFulfillmentState();
@@ -17,6 +19,55 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
   double sum = 0;
   int len = 0;
   FocusNode myFocusNode = FocusNode();
+
+  String asset = "";
+  String name = "";
+  double distance = 0.0;
+  String location = "";
+  String username = "";
+  String grodeGrade = "A+";
+  int grode = 0;
+  int deliveries = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    asset = widget.profile.asset;
+    location = widget.profile.location;
+    name = widget.profile.name;
+    distance = widget.profile.distance;
+    username = widget.profile.username;
+    grode = widget.profile.grode;
+    if (grode >= 97) {
+      grodeGrade = "A+";
+    } else if (grode >= 93) {
+      grodeGrade = "A";
+    } else if (grode >= 90) {
+      grodeGrade = "A-";
+    } else if (grode >= 87) {
+      grodeGrade = "B+";
+    } else if (grode >= 83) {
+      grodeGrade = "B";
+    } else if (grode >= 80) {
+      grodeGrade = "B-";
+    } else if (grode >= 77) {
+      grodeGrade = "C+";
+    } else if (grode >= 73) {
+      grodeGrade = "C";
+    } else if (grode >= 70) {
+      grodeGrade = "C-";
+    } else if (grode >= 67) {
+      grodeGrade = "D+";
+    } else if (grode >= 63) {
+      grodeGrade = "D";
+    } else if (grode >= 60) {
+      grodeGrade = "D-";
+    } else {
+      grodeGrade = "F";
+    }
+
+    deliveries = widget.profile.deliveries;
+  }
 
   Widget orderTag(String order, int index) {
     return Container(
@@ -61,9 +112,9 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-              child: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios),
+              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -75,7 +126,7 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                 height: 40,
                 width: 80,
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.chat_bubble_outline,
                     size: 30,
                   ),
@@ -93,39 +144,38 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                         children: [
                           Align(
                             alignment: Alignment.center,
-                            child: const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage("lib/assets/profile.jpeg"),
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(asset),
                               radius: 65,
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: CircleAvatar(
-                              radius: 21,
-                              backgroundColor: GroderColors.black,
-                              child: CircleAvatar(
-                                radius: 20,
-                                backgroundColor: GroderColors.lightGreen,
-                                child: Center(
-                                  child: Text(
-                                    "5",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 24,
-                                      color: GroderColors.black,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Align(
+                          // alignment: Alignment.bottomRight,
+                          //   child: CircleAvatar(
+                          //     radius: 21,
+                          //     backgroundColor: GroderColors.black,
+                          //     child: CircleAvatar(
+                          //       radius: 20,
+                          //       backgroundColor: GroderColors.lightGreen,
+                          //       child: Center(
+                          //         child: Text(
+                          //           "5",
+                          //           style: TextStyle(
+                          //             fontWeight: FontWeight.w500,
+                          //             fontSize: 24,
+                          //             color: GroderColors.black,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
                   ),
                   Text(
-                    "John Hull",
+                    name,
                     style: TextStyle(
                       fontSize: 34,
                       color: GroderColors.black,
@@ -136,7 +186,7 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "@johnchull",
+                        "@$username",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -151,7 +201,7 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                         ),
                       ),
                       Text(
-                        "3.4 mi",
+                        "$distance mi",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -181,7 +231,7 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                             height: 25,
                             child: Center(
                               child: Text(
-                                "97 A+",
+                                "$grode $grodeGrade",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: GroderColors.white,
@@ -215,7 +265,7 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                             height: 25,
                             child: Center(
                               child: Text(
-                                "105",
+                                "$deliveries",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: GroderColors.white,
@@ -311,7 +361,7 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                   Container(
                     height: 250,
                     child: SingleChildScrollView(
-                      physics: ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       child: Column(
                         children: [
                           ListView.builder(
@@ -328,13 +378,13 @@ class _OrderFulfillmentState extends State<OrderFulfillment> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
                     child: Divider(
                       height: 1,
                       color: GroderColors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
