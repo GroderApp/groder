@@ -20,47 +20,112 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class Post {
+class GroderProfile {
   final String name;
   final String location;
   final double distance;
+  final String asset;
+  final String username;
+  final int grode;
+  final int deliveries;
 
-  Post(this.name, this.location, this.distance);
+  GroderProfile(this.name, this.location, this.distance, this.asset,
+      this.username, this.grode, this.deliveries);
 }
 
 class _SearchState extends State<Search> {
-  final SearchBarController<Post> _searchBarController = SearchBarController();
+  final SearchBarController<GroderProfile> _searchBarController =
+      SearchBarController();
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   bool toggle = false;
   String inputtext = "";
 
-  List<Post> posts = [
-    Post("John Hull", "Publix", 3.4),
-    Post("Drew Jones", "Walmart", 2.8),
-    Post("Joseph Donald", "Sams", 1.9),
-    Post("Cali Francis", "Sams", 3.7),
-    Post("Sarah Johnson", "Publix", 1.4),
-    Post("Bill Joe", "Walmart", 1.6),
-    Post("Casey Junkin", "Costco", 7.9),
-    Post("Eva Long", "Aldis", 4.7),
-    Post("Kali Watt", "HEB", 2.4),
-    Post("James Harden", "Kroger", 5.6),
+  List<GroderProfile> posts = [
+    GroderProfile("John Hull", "Publix", 3.4, "lib/assets/profile.jpeg",
+        "johnhull", 97, 105),
+    GroderProfile("Drew Jones", "Walmart", 2.8, "lib/assets/profile2.jpg",
+        "drewjones", 89, 94),
+    GroderProfile("Joseph Donald", "Sams", 1.9, "lib/assets/profile3.jpeg",
+        "josephdonald", 93, 207),
+    GroderProfile("Cali Francis", "Sams", 3.7, "lib/assets/profile4.jpeg",
+        "califrancis", 99, 174),
+    GroderProfile("Sarah Johnson", "Publix", 1.4, "lib/assets/profile5.jpg",
+        "sarahjohnson", 83, 342),
+    GroderProfile("Bill Joe", "Walmart", 1.6, "lib/assets/profile6.jpg",
+        "billjoe", 91, 125),
+    GroderProfile("Casey Junkin", "Costco", 7.9, "lib/assets/profile7.jpg",
+        "caseyjunkin", 86, 32),
+    GroderProfile("Eva Long", "Aldis", 4.7, "lib/assets/profile8.jpeg",
+        "evalong", 69, 278),
+    GroderProfile("Kali Watt", "HEB", 2.4, "lib/assets/profile9.jpg",
+        "kaliwatt", 83, 476),
   ];
 
-  Future<List<Post>> _getAllPosts(String? text) async {
-    await Future.delayed(Duration(seconds: text!.length == 4 ? 10 : 1));
+  Container getListTile(GroderProfile? post, int index) {
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      decoration: BoxDecoration(
+        color: GroderColors.white,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 4,
+            blurRadius: 2,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: ListTile(
+        title: Text(
+          post!.name,
+          style: const TextStyle(
+            fontSize: 19,
+          ),
+        ),
+        isThreeLine: true,
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Currently at " + post.location),
+            Text(post.distance.toString() + " mi away"),
+          ],
+        ),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => OrderFulfillment(profile: post),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<List<GroderProfile>> _getAllPosts(String? text) async {
+    await Future.delayed(Duration(seconds: text!.length == 3 ? 10 : 1));
     inputtext = text;
+    List<GroderProfile> posts2 = [];
     if (!toggle) {
-      posts.sort((a, b) => a.distance.compareTo(b.distance));
-      posts.sort(
-          (a, b) => a.location.compareTo(text) - b.location.compareTo(text));
+      for (GroderProfile a in posts) {
+        if (a.location.toLowerCase().contains(text.toLowerCase())) {
+          posts2.add(a);
+        }
+      }
+      posts2.sort((a, b) => a.distance.compareTo(b.distance));
     } else {
-      posts.sort((a, b) => a.distance.compareTo(b.distance));
-      posts.sort((a, b) => a.name.compareTo(text) - b.name.compareTo(text));
+      for (GroderProfile a in posts) {
+        if (a.name.toLowerCase().contains(text.toLowerCase())) {
+          posts2.add(a);
+        } else if (a.username.toLowerCase().contains(text.toLowerCase())) {
+          posts2.add(a);
+        }
+      }
+      posts2.sort((a, b) => a.distance.compareTo(b.distance));
     }
-    return posts;
+    return posts2;
   }
 
   @override
@@ -68,12 +133,12 @@ class _SearchState extends State<Search> {
     posts.sort((a, b) => a.distance.compareTo(b.distance));
     return Scaffold(
       key: _key,
-      endDrawer: EndDrawer(),
+      endDrawer: const EndDrawer(),
       body: SafeArea(
         child: Column(
           children: [
             Row(children: [
-              SizedBox(
+              const SizedBox(
                 width: 3,
               ),
               IconButton(
@@ -83,32 +148,32 @@ class _SearchState extends State<Search> {
                     MaterialPageRoute(builder: (context) => Profile()),
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.person_outlined,
                   size: 30,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ChatPage()),
+                    MaterialPageRoute(builder: (context) => const ChatPage()),
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.chat_bubble_outline,
                   size: 30,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               IconButton(
                 onPressed: () {
                   _key.currentState!.openEndDrawer();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.settings_outlined,
                   size: 30,
                 ),
@@ -125,14 +190,14 @@ class _SearchState extends State<Search> {
               ),
             ),
             Expanded(
-              child: SearchBar<Post>(
+              child: SearchBar<GroderProfile>(
                 loader: Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 100),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
                   child: Center(
                     child: SizedBox(
                       width: 50,
                       height: 50,
-                      child: new CircularProgressIndicator(
+                      child: CircularProgressIndicator(
                         color: GroderColors.green,
                         value: null,
                         strokeWidth: 7.0,
@@ -170,20 +235,33 @@ class _SearchState extends State<Search> {
                                   ),
                                 ],
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                    const BorderRadius.all(Radius.circular(10)),
                               ),
                               child: ListTile(
-                                title: Text(posts[index].name),
+                                title: Text(
+                                  posts[index].name,
+                                  style: const TextStyle(
+                                    fontSize: 19,
+                                  ),
+                                ),
                                 isThreeLine: true,
-                                subtitle: Text("Currently at " +
-                                    posts[index].location +
-                                    " | Lives " +
-                                    posts[index].distance.toString() +
-                                    " mi away"),
+                                subtitle: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Currently at " +
+                                        posts[index].location),
+                                    Text(posts[index].distance.toString() +
+                                        " mi away"),
+                                  ],
+                                ),
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          OrderFulfillment()));
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => OrderFulfillment(
+                                          profile: posts[index]),
+                                    ),
+                                  );
                                 },
                               ),
                             ),
@@ -198,19 +276,20 @@ class _SearchState extends State<Search> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      child: Text("Location"),
+                      child: const Text("Location"),
                       onPressed: () {
                         setState(() {
                           toggle = !toggle;
                         });
-                        if (toggle)
+                        if (toggle) {
                           _searchBarController.sortList((a, b) =>
                               a.name.compareTo(inputtext) -
                               b.name.compareTo(inputtext));
-                        else
+                        } else {
                           _searchBarController.sortList((a, b) =>
                               a.location.compareTo(inputtext) -
                               b.location.compareTo(inputtext));
+                        }
                       },
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all<EdgeInsets>(
@@ -240,19 +319,20 @@ class _SearchState extends State<Search> {
                       width: 10,
                     ),
                     TextButton(
-                      child: Text("Name"),
+                      child: const Text("Name"),
                       onPressed: () {
                         setState(() {
                           toggle = !toggle;
                         });
-                        if (toggle)
+                        if (toggle) {
                           _searchBarController.sortList((a, b) =>
                               a.name.compareTo(inputtext) -
                               b.name.compareTo(inputtext));
-                        else
+                        } else {
                           _searchBarController.sortList((a, b) =>
                               a.location.compareTo(inputtext) -
                               b.location.compareTo(inputtext));
+                        }
                       },
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all<EdgeInsets>(
@@ -293,57 +373,11 @@ class _SearchState extends State<Search> {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 15,
                 crossAxisCount: 1,
-                onItemFound: (Post? post, int index) {
-                  return Container(
-                    margin: new EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(
-                      color: GroderColors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 4,
-                          blurRadius: 2,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      title: Text(post!.name),
-                      isThreeLine: true,
-                      subtitle: Text("Currently at " +
-                          post.location +
-                          " | Lives " +
-                          post.distance.toString() +
-                          " mi away"),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OrderFulfillment()));
-                      },
-                    ),
-                  );
+                onItemFound: (GroderProfile? post, int index) {
+                  return getListTile(post, index);
                 },
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Detail extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            Text("Detail"),
           ],
         ),
       ),

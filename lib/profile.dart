@@ -6,11 +6,175 @@ import 'package:groder/shared/groder_colors.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
-  Profile({Key? key}) : super(key: key);
+  const Profile({Key? key}) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileState();
 }
+
+class PastOrderData {
+  String img;
+  String store;
+  String date;
+  String location;
+  List<String> people;
+  List<String> categories;
+  PastOrderData(this.store, this.date, this.location, this.people,
+      this.categories, this.img);
+}
+
+List<PastOrderData> publixOrders = [
+  PastOrderData(
+      "Publix",
+      "11/27/21",
+      "950 W Peachtree St NW",
+      [
+        "lib/assets/profile2.jpg",
+        "lib/assets/profile3.jpeg",
+        "lib/assets/profile4.jpeg",
+        "lib/assets/profile5.jpg"
+      ],
+      ["Home", "Kitchen", "Meals"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Publix",
+      "11/26/21",
+      "950 W Peachtree St NW",
+      [
+        "lib/assets/profile6.jpg",
+        "lib/assets/profile7.jpg",
+        "lib/assets/profile8.jpeg",
+        "lib/assets/profile9.jpg"
+      ],
+      ["Furniture", "Entertainment", "Food"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Publix",
+      "11/25/21",
+      "950 W Peachtree St NW",
+      [
+        "lib/assets/profile2.jpg",
+        "lib/assets/profile3.jpeg",
+        "lib/assets/profile4.jpeg",
+        "lib/assets/profile5.jpg"
+      ],
+      ["Home", "Kitchen", "Meals"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Publix",
+      "11/24/21",
+      "950 W Peachtree St NW",
+      [
+        "lib/assets/profile6.jpg",
+        "lib/assets/profile7.jpg",
+        "lib/assets/profile8.jpeg",
+        "lib/assets/profile9.jpg"
+      ],
+      ["Furniture", "Entertainment", "Food"],
+      "lib/assets/profile.jpeg"),
+];
+
+List<PastOrderData> costcoOrders = [
+  PastOrderData(
+      "Costco",
+      "11/27/21",
+      "500 Brookhaven Ave",
+      [
+        "lib/assets/profile2.jpg",
+        "lib/assets/profile3.jpeg",
+        "lib/assets/profile4.jpeg",
+        "lib/assets/profile5.jpg"
+      ],
+      ["Home", "Kitchen", "Meals"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Costco",
+      "11/26/21",
+      "500 Brookhaven Ave",
+      [
+        "lib/assets/profile6.jpg",
+        "lib/assets/profile7.jpg",
+        "lib/assets/profile8.jpeg",
+        "lib/assets/profile9.jpg"
+      ],
+      ["Furniture", "Entertainment", "Food"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Costco",
+      "11/25/21",
+      "500 Brookhaven Ave",
+      [
+        "lib/assets/profile2.jpg",
+        "lib/assets/profile3.jpeg",
+        "lib/assets/profile4.jpeg",
+        "lib/assets/profile5.jpg"
+      ],
+      ["Home", "Kitchen", "Meals"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Costco",
+      "11/24/21",
+      "500 Brookhaven Ave",
+      [
+        "lib/assets/profile6.jpg",
+        "lib/assets/profile7.jpg",
+        "lib/assets/profile8.jpeg",
+        "lib/assets/profile9.jpg"
+      ],
+      ["Furniture", "Entertainment", "Food"],
+      "lib/assets/profile.jpeg"),
+];
+
+List<PastOrderData> walmartOrders = [
+  PastOrderData(
+      "Walmart",
+      "11/27/21",
+      "1801 Howell Mill Rd NW",
+      [
+        "lib/assets/profile2.jpg",
+        "lib/assets/profile3.jpeg",
+        "lib/assets/profile4.jpeg",
+        "lib/assets/profile5.jpg"
+      ],
+      ["Home", "Kitchen", "Meals"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Walmart",
+      "11/26/21",
+      "1801 Howell Mill Rd NW",
+      [
+        "lib/assets/profile6.jpg",
+        "lib/assets/profile7.jpg",
+        "lib/assets/profile8.jpeg",
+        "lib/assets/profile9.jpg"
+      ],
+      ["Furniture", "Entertainment", "Food"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Walmart",
+      "11/25/21",
+      "1801 Howell Mill Rd NW",
+      [
+        "lib/assets/profile2.jpg",
+        "lib/assets/profile3.jpeg",
+        "lib/assets/profile4.jpeg",
+        "lib/assets/profile5.jpg"
+      ],
+      ["Home", "Kitchen", "Meals"],
+      "lib/assets/profile.jpeg"),
+  PastOrderData(
+      "Walmart",
+      "11/24/21",
+      "1801 Howell Mill Rd NW",
+      [
+        "lib/assets/profile6.jpg",
+        "lib/assets/profile7.jpg",
+        "lib/assets/profile8.jpeg",
+        "lib/assets/profile9.jpg"
+      ],
+      ["Furniture", "Entertainment", "Food"],
+      "lib/assets/profile.jpeg"),
+];
 
 class _ProfileState extends State<Profile> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -19,16 +183,16 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      endDrawer: EndDrawer(),
+      endDrawer: const EndDrawer(),
       body: DefaultTabController(
         length: 3,
         child: SafeArea(
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: new IconButton(
-                  icon: new Icon(Icons.arrow_back_ios),
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -42,15 +206,15 @@ class _ProfileState extends State<Profile> {
                   child: Row(
                     children: [
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.chat_bubble_outline,
                           size: 30,
                         ),
                         onPressed: () {},
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.settings_outlined,
                           size: 30,
                         ),
@@ -117,7 +281,7 @@ class _ProfileState extends State<Profile> {
                                 fontSize: 12,
                               ),
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Container(
                               width: 125,
                               height: 25,
@@ -151,7 +315,7 @@ class _ProfileState extends State<Profile> {
                                 fontSize: 12,
                               ),
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Container(
                               width: 125,
                               height: 25,
@@ -192,7 +356,7 @@ class _ProfileState extends State<Profile> {
                               tabs: const [
                                 Tab(child: Text("Publix")),
                                 Tab(child: Text("Costco")),
-                                Tab(child: Text("Wawa")),
+                                Tab(child: Text("Walmart")),
                               ]),
                         )),
                     Expanded(
@@ -201,37 +365,48 @@ class _ProfileState extends State<Profile> {
                         SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: Column(
-                            children: const [
-                              SizedBox(height: 10),
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
+                            children: [
+                              ListView.builder(
+                                physics: const ScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: publixOrders.length,
+                                itemBuilder: (context, idx) {
+                                  return PastOrder(data: publixOrders[idx]);
+                                },
+                              ),
                             ],
                           ),
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: Column(
-                            children: const [
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
+                            children: [
+                              ListView.builder(
+                                physics: const ScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: costcoOrders.length,
+                                itemBuilder: (context, idx) {
+                                  return PastOrder(data: costcoOrders[idx]);
+                                },
+                              ),
                             ],
                           ),
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: Column(
-                            children: const [
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
-                              PastOrder(),
+                            children: [
+                              ListView.builder(
+                                physics: const ScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: walmartOrders.length,
+                                itemBuilder: (context, idx) {
+                                  return PastOrder(data: walmartOrders[idx]);
+                                },
+                              ),
                             ],
                           ),
                         ),
